@@ -50,36 +50,55 @@ const HomePage = () => {
     <div>
 {/* ====== HERO ====== */}
       <section style={{ position:'relative', minHeight:'92vh', display:'flex', alignItems:'center', overflow:'hidden' }}>
-        {/* Full bg image — hero.png */}
-        <div style={{ position:'absolute', inset:0, backgroundImage:'url(/hero.png)', backgroundSize:'cover', backgroundPosition:'center', backgroundRepeat:'no-repeat' }}/>
-        {/* Dark overlay so text is readable */}
-        <div style={{ position:'absolute', inset:0, background:'linear-gradient(90deg, rgba(2,8,23,0.92) 0%, rgba(2,8,23,0.75) 50%, rgba(2,8,23,0.35) 100%)' }}/>
-        {/* Bottom fade */}
-        <div style={{ position:'absolute', bottom:0, left:0, right:0, height:160, background:'linear-gradient(to top, #020817 0%, transparent 100%)' }}/>
 
-        <div className="container" style={{ position:'relative', zIndex:1, padding:'80px 24px' }}>
-          {/* LEFT content only — no right column */}
+        {/* ── Desktop BG (hidden on mobile) ── */}
+        <div className="hero-bg-desktop" style={{
+          position:'absolute', inset:0,
+          backgroundImage:'url(/hero.png)',
+          backgroundSize:'cover', backgroundPosition:'center', backgroundRepeat:'no-repeat',
+        }}/>
+
+        {/* ── Mobile BG (hidden on desktop) ── */}
+        <div className="hero-bg-mobile" style={{
+          position:'absolute', inset:0,
+          backgroundImage:'url(/mobilehero.png)',
+          backgroundSize:'cover', backgroundPosition:'top center', backgroundRepeat:'no-repeat',
+        }}/>
+
+        {/* Desktop overlay — left heavy so text readable */}
+        <div className="hero-overlay-desktop" style={{
+          position:'absolute', inset:0,
+          background:'linear-gradient(90deg, rgba(2,8,23,0.92) 0%, rgba(2,8,23,0.75) 50%, rgba(2,8,23,0.35) 100%)',
+        }}/>
+
+        {/* Mobile overlay — strong at top for text, fades to show bottle below */}
+        <div className="hero-overlay-mobile" style={{
+          position:'absolute', inset:0,
+          background:'linear-gradient(180deg, rgba(2,8,23,0.97) 0%, rgba(2,8,23,0.95) 35%, rgba(2,8,23,0.55) 60%, rgba(2,8,23,0.1) 100%)',
+        }}/>
+
+        {/* Bottom fade */}
+        <div style={{ position:'absolute', bottom:0, left:0, right:0, height:140, background:'linear-gradient(to top, #020817 0%, transparent 100%)' }}/>
+
+        {/* ── DESKTOP content ── */}
+        <div className="hero-content-desktop container" style={{ position:'relative', zIndex:1, padding:'80px 24px' }}>
           <div style={{ maxWidth:640, animation:'fadeInLeft 0.8s ease forwards' }}>
             <div style={{ display:'inline-flex', alignItems:'center', gap:8, background:'rgba(59,130,246,0.12)', border:'1px solid rgba(59,130,246,0.35)', borderRadius:20, padding:'8px 18px', marginBottom:28 }}>
               <span style={{ width:8, height:8, borderRadius:'50%', background:'#3b82f6', display:'inline-block', animation:'pulse 2s infinite' }}/>
               <span style={{ color:'#60a5fa', fontSize:12, fontWeight:700, letterSpacing:'0.07em' }}>PREMIUM QUALITY. VERIFIED RESULTS.</span>
             </div>
-
             <h1 style={{ fontSize:'clamp(38px,5.5vw,68px)', fontWeight:900, lineHeight:1.06, color:'#fff', marginBottom:22, letterSpacing:'-0.03em' }}>
               Research Peptides<br/>
               Built on <span style={{ color:'#3b82f6' }}>Purity,</span><br/>
               <span style={{ color:'#3b82f6' }}>Testing &amp; Transparency</span>
             </h1>
-
             <p style={{ color:'#94a3b8', fontSize:'clamp(15px,2vw,18px)', lineHeight:1.9, marginBottom:40, maxWidth:500 }}>
               Carefully sourced research compounds backed by transparent quality control, batch testing, and reliable documentation.
             </p>
-
             <div style={{ display:'flex', gap:14, marginBottom:48, flexWrap:'wrap' }}>
               <Link to="/shop"><button className="btn-primary" style={{ padding:'15px 34px', fontSize:15 }}>Shop Products <IconArrowRight size={17}/></button></Link>
               <Link to="/quality"><button className="btn-outline" style={{ padding:'15px 34px', fontSize:15 }}>Quality Standards</button></Link>
             </div>
-
             <div style={{ display:'flex', gap:20, flexWrap:'wrap' }}>
               {['Lab Tested','Research Use Only','COA Available','Carefully Sourced'].map(b => (
                 <div key={b} style={{ display:'flex', alignItems:'center', gap:6, color:'#64748b', fontSize:13 }}>
@@ -88,11 +107,34 @@ const HomePage = () => {
                 </div>
               ))}
             </div>
-
-            {/* disclaimer */}
             <div style={{ marginTop:40, padding:'10px 18px', background:'rgba(30,58,95,0.25)', borderRadius:10, border:'1px solid rgba(30,58,95,0.45)', display:'inline-flex', alignItems:'center', gap:8 }}>
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#60a5fa" strokeWidth="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
               <span style={{ color:'#64748b', fontSize:12 }}>For Research Use Only. Not for human consumption.</span>
+            </div>
+          </div>
+        </div>
+
+        {/* ── MOBILE content — text at very top ── */}
+        <div className="hero-content-mobile" style={{ position:'absolute', zIndex:1, width:'100%', top:0, left:0, padding:'28px 20px 0' }}>
+          <div style={{ animation:'fadeInUp 0.7s ease forwards' }}>
+            <div style={{ display:'inline-flex', alignItems:'center', gap:6, background:'rgba(59,130,246,0.12)', border:'1px solid rgba(59,130,246,0.35)', borderRadius:20, padding:'6px 14px', marginBottom:14 }}>
+              <span style={{ width:6, height:6, borderRadius:'50%', background:'#3b82f6', display:'inline-block' }}/>
+              <span style={{ color:'#60a5fa', fontSize:10, fontWeight:700, letterSpacing:'0.06em' }}>PREMIUM QUALITY. VERIFIED RESULTS.</span>
+            </div>
+
+            <h1 style={{ fontSize:26, fontWeight:900, lineHeight:1.12, color:'#fff', marginBottom:12, letterSpacing:'-0.02em' }}>
+              Research Peptides<br/>
+              Built on <span style={{ color:'#3b82f6' }}>Purity,</span><br/>
+              <span style={{ color:'#3b82f6' }}>Testing &amp; Transparency</span>
+            </h1>
+
+            <p style={{ color:'#94a3b8', fontSize:13, lineHeight:1.7, marginBottom:20, maxWidth:300 }}>
+              Carefully sourced research compounds backed by transparent quality control and reliable documentation.
+            </p>
+
+            <div style={{ display:'flex', gap:10, marginBottom:0, flexWrap:'wrap' }}>
+              <Link to="/shop"><button className="btn-primary" style={{ padding:'10px 20px', fontSize:13 }}>Shop Products <IconArrowRight size={14}/></button></Link>
+              <Link to="/quality"><button className="btn-outline" style={{ padding:'10px 20px', fontSize:13 }}>Quality Standards</button></Link>
             </div>
           </div>
         </div>
